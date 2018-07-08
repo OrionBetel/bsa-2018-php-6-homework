@@ -35,9 +35,7 @@ class CurrenciesController extends Controller
         $foundCurrency = $this->repository->findById($id);
 
         if (is_null($foundCurrency)) {
-
-            return response('Error 404: Wrong currency ID.', 404);
-
+            return $this->wrongIdError();
         } else {
             $formattedCurrency = CurrencyPresenter::present($foundCurrency);
 
@@ -45,5 +43,12 @@ class CurrenciesController extends Controller
 
             return $data;
         }
+    }
+
+    protected function wrongIdError()
+    {
+        return response()->json([
+            'message' => 'Wrong Currency ID'
+        ], 404);
     }
 }

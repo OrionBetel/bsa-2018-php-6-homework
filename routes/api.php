@@ -20,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/currencies', 'CurrenciesController@getCurrencies');
 
 Route::get('/currencies/{id}', 'CurrenciesController@getCurrency');
+
+Route::prefix('/admin')->group(function() {
+    Route::resource('/currencies', 'AdminCurrenciesController');
+});
