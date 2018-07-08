@@ -19,7 +19,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
                 $item->symbol,
                 $item->quotes->USD->price,
                 (new \DateTime)->setTimestamp($item->last_updated),
-                ($item->id % 2 == 0) // make some currencies inactive
+                ($item->id % 2 != 0) // make some currencies inactive
             );
             
             $this->repository[] = $currency;

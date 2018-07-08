@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/currencies', 'CurrenciesController@getCurrencies');
+
+Route::get('/currencies/{id}', 'CurrenciesController@getCurrency');
