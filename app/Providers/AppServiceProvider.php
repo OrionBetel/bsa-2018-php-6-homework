@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\CurrencyRepositoryInterface;
+use App\Services\CurrencyRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            'App\Services\CurrencyRepositoryInterface',
+            'App\Services\CurrencyRepository'
+        );
     }
 }
