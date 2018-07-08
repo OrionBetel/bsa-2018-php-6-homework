@@ -8,11 +8,16 @@ use App\Services\CurrencyPresenter;
 
 class CurrenciesController extends Controller
 {
+    protected $repository;
+
+    public function __construct(CurrencyRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+    
     public function getCurrencies()
     {
-        $currencyRepository = app(CurrencyRepositoryInterface::class);
-
-        $activeCurrencies = $currencyRepository->findActive();
+        $activeCurrencies = $this->repository->findActive();
 
         $formattedCurrencies = [];
 
@@ -27,9 +32,7 @@ class CurrenciesController extends Controller
 
     public function getCurrency(int $id)
     {
-        $currencyRepository = app(CurrencyRepositoryInterface::class);
-
-        $foundCurrency = $currencyRepository->findById($id);
+        $foundCurrency = $this->repository->findById($id);
 
         if (is_null($foundCurrency)) {
 
