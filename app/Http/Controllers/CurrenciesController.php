@@ -45,6 +45,19 @@ class CurrenciesController extends Controller
         }
     }
 
+    public function showAll()
+    {
+        $currencies = $this->repository->findAll();
+
+        $formattedCurrencies = [];
+
+        foreach ($currencies as $currency) {
+            $formattedCurrencies[] = CurrencyPresenter::present($currency);
+        }
+        
+        return view('currencies', ['currencies' => $formattedCurrencies]);
+    }
+
     protected function wrongIdError()
     {
         return response()->json([
